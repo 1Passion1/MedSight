@@ -1,0 +1,30 @@
+# 核心深度学习
+torch>=2.1.0
+torchvision>=0.16.0
+timm>=0.9.0
+
+# 数据处理
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+opencv-python>=4.8
+Pillow>=10.0
+pydicom>=2.4          # DICOM 读取
+SimpleITK>=2.3        # NIfTI / 医学影像
+albumentations>=1.3   # 影像增强
+monai>=1.3            # 医学影像深度学习工具
+
+# 指标与可视化
+matplotlib>=3.7
+seaborn>=0.12
+tensorboard>=2.14
+
+# 配置与服务
+PyYAML>=6.0
+tqdm>=4.66
+fastapi>=0.104        # 推理 API
+uvicorn>=0.24
+pydantic>=2.4
+
+# 测试与质量
+pytest>=7.4

@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# 数据与模型权重（体积大，不入库）
+/data/
+/datasets/
+*.pt
+*.pth
+*.onnx
+*.h5
+*.ckpt
+checkpoints/
+runs/
+outputs/
+
+# 日志与缓存
+*.log
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+
+# 密钥（严禁提交）
+.env
+*.pem
+*_token*
+secrets/

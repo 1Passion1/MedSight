@@ -1,0 +1,67 @@
+# MedSight 训练/评估配置文件
+# 使用方法: python -m src.train --config configs/config.yaml
+
+project:
+  name: MedSight
+  task: chest_xray_multilabel   # chest_xray_multilabel | pneumonia_binary | lung_nodule
+
+data:
+  root: data
+  train_dir: data/train
+  val_dir: data/val
+  test_dir: data/test
+  # 若使用 CSV 清单则填写（列名需与 dataset.py 一致），否则留空
+  train_csv: null
+  val_csv: null
+  labels:
+    - Atelectasis
+    - Cardiomegaly
+    - Effusion
+    - Infiltration
+    - Mass
+    - Nodule
+    - Pneumonia
+    - Pneumothorax
+    - Consolidation
+    - Edema
+    - Emphysema
+    - Fibrosis
+    - Pleural_Thickening
+    - Hernia
+  image_size: 512
+  channels: 3        # 灰度影像复制为 3 通道以复用 ImageNet 预训练
+  num_workers: 4
+  mean: [0.5056, 0.5056, 0.5056]
+  std: [0.252, 0.252, 0.252]
+
+model:
+  backbone: convnext_tiny   # resnet50 | densenet121 | convnext_tiny | vit_base
+  pretrained: true
+  dropout: 0.3
+  num_classes: 14
+
+train:
+  epochs: 40
+  batch_size: 32
+  optimizer: adamw
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  scheduler: cosine
+  warmup_epochs: 3
+  mixed_precision: true
+  grad_clip: 5.0
+  # 类别不平衡处理
+  pos_weight: auto       # auto | null | 浮点数
+  early_stopping_patience: 8
+  seed: 42
+  output_dir: checkpoints
+  log_dir: runs
+
+eval:
+  threshold: 0.5
+  metrics: [auroc, auprc, f1, sensitivity, specificity, accuracy]
+  save_plots: true
+
+inference:
+  device: auto           # auto | cpu | cuda
+  tta: true              # 测试时增强
